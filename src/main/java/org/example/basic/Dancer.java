@@ -1,7 +1,44 @@
 package org.example.basic;
 
+import java.util.Enumeration;
+
 public class Dancer {
-    private String cureName;
-    private String myName;
+    private final String cureName;
+    private final String myName;
+    private DanceLevel level = DanceLevel.PRO;
+    private boolean stretch;
+    private boolean flexible;
+
+    public Dancer(String cureName, String myName) {
+        this.cureName = cureName;
+        this.myName = myName;
+    }
+
+    private void stretch() {
+        System.out.println(myName + "님이 스트레칭 합니다.");
+        this.stretch = true;
+    }
+
+    private void makeFlexible() {
+        if(!stretch) {
+            System.out.println(myName + "님이 스트레칭을 안해서 죽엇습니다.");
+            return;
+        }
+        System.out.println(myName + "님이 유연성 운동을 합니다.");
+        this.flexible = true;
+    }
+
+    public void dance() {
+        stretch();
+        makeFlexible();
+        if(!flexible) {
+            System.out.println(myName + "님이 유연성 운동을 안해서 죽었습니다.");
+            return;
+        }
+        System.out.println((myName + "님이 춤을 춥니다."));
+    }
+
+
+
 
 }
