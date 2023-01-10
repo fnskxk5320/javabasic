@@ -1,9 +1,21 @@
 package org.example.inherit;
 
+import org.example.abs.Rapper;
+import org.example.abs.Singer;
 import org.example.basic.Dancer;
 
-public class IdolDancer extends Dancer {
+public class IdolDancer extends Dancer implements Singer, Rapper {
     private int numberOfFan;
+
+    @Override
+    public void sing() {
+        System.out.println("노래를 부릅니다.");
+    }
+
+    @Override
+    public void rap() {
+        System.out.println("랩을 합니다.");
+    }
 
     public IdolDancer(String crueName, String myName) {
         super(crueName, myName);
@@ -16,6 +28,7 @@ public class IdolDancer extends Dancer {
         wink();
     }
     private void wink() {
-        System.out.println("윙크를 세게 날립니다.");
+        System.out.println("윙크를 세게 날리며 춤 춥니다.");
     }
+
 }
