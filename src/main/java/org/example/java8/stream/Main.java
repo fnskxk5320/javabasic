@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
+import static org.example.java8.stream.Dish.*;
 
 public class Main {
 
@@ -45,9 +46,52 @@ public class Main {
                 .map(d -> d.getName())
                 .collect(toList());
     }
+
+    // 요리 목록 중에 육류이면서 600칼로리 미만인 요리만 필터링
+
+
     public static void main(String[] args) {
-        List<String> dishName1 = getHealthDishName2(Dish.menu);
+        List<String> dishName1 = getHealthDishName2(menu);
         System.out.println(dishName1);
+
+        /*
+        Dish.menu.stream().filter(d -> d.getType() == Dish.Type.MEAT)
+                .filter(d -> d.getCalorie() < 600)
+                .forEach(System.out::println);
+         */
+
+        menu.stream()
+                .filter(dish -> dish.getType() == Type.MEAT && dish.getCalorie() < 600)
+                .collect(toList())
+                .forEach(System.out::println);
+        List<Integer> nums = List.of(1,2,1,3,3,2,4,4,3,6);
+
+        // nums 리스트에서 짝수만 필터링한 후 중복을 제거해주세요.
+        nums.stream().filter(n -> n%2==0).distinct().collect(toList()).forEach(System.out::println);
+
+        System.out.println("============================================");
+
+        //원하는 개수만 필터링하기
+        //칼로리가 300칼로리보다 큰 요리중에 처음 발견된 3개만 필터링
+
+        menu.stream().filter(d -> d.getCalorie() > 300).limit(3).collect(toList()).forEach(System.out::println);
+
+        //요소 생략해서 필터링
+        //칼로리가 300 칼로리보다 큰 요리 중에 처음 2개는 생략하고 필터링
+
+        System.out.println("============================================");
+
+        menu.stream().filter(d -> d.getCalorie() > 300)
+                .skip(2)
+                .collect(toList())
+                .forEach(System.out::println);
+
+        //스트림을 사용해서 처음 등장하는 고기 요리 2개를 필터링하세요
+
+        System.out.println("============================================");
+        menu.stream().filter(d -> d.getType()==Type.MEAT)
+                .limit(2).collect(toList())
+                .forEach(System.out::println);
 
     }
 }
